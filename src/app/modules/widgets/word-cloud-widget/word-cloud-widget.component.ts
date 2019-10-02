@@ -25,7 +25,7 @@ export class WordCloudWidgetComponent implements OnInit {
               private wordsFrequencyService: WordsFrequencyService) {
     this.options = {
         settings: {
-        minFontSize: 10,
+        minFontSize: 20,
         maxFontSize: 100,
         },
         margin: {
@@ -40,7 +40,7 @@ export class WordCloudWidgetComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.wordList = this.wordsFrequencyService.wordsWeight(this.widgetConfiguration.selectedProcessingElements[0].result.lemma);
+      this.wordList = this.ParseWordsList();
   }
   close() {
     this.store.dispatch(new CloseResultWidget({widget: this.widgetConfiguration}));
@@ -54,7 +54,25 @@ export class WordCloudWidgetComponent implements OnInit {
     this.widgetService.changeWidgetTitle(this.widgetConfiguration);
   }
 
+  calcWordsWeight() {
+      var lemmasList = this.widgetConfiguration.selectedProcessingElements[0].result.lemma;
+      var WordsWeightList = [];
+      for (var lemma of lemmasList) {
+            WordsWeightList[lemma.value] = ( typeof WordsWeightList[lemma.value] !== 'undefined' ) ? WordsWeightList[lemma.value] += 1 : 1;
+      }
+      return WordsWeightList;
+  }
 
+  ParseWordsList() {
+      var Words = this.calcWordsWeight();
+      var tmpList = [];
+      for (let key in Words) {
+        tmpList.push({size: Words[key], text: key});
+        }
+      tmpList.sort((a, b) => (a.size < b.size) ? 1 : -1);
+
+      return  tmpList.slice(0, 100);
+  }
 
 
 }

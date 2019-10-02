@@ -9,10 +9,11 @@ export class WordsFrequencyService {
   wordsWeight(wordData) {
 
       for (let i = 0; i < wordData.length; i++) {
+          if (wordData[i] !== "undefined") {
           if ('abcdefghijklmnopqrstuvwxyzüöäß'.indexOf(wordData[i].toLowerCase()) !== -1) {
         this.words[wordData[i]] = ( typeof(this.words[wordData[i].value]) !== 'undefined' ) ? this.words[wordData[i].value] += 1 : 1;
     }}
-
+            }
    var tmpList: any =  [];
    if (typeof wordData[0].value !== 'undefined') {
 
