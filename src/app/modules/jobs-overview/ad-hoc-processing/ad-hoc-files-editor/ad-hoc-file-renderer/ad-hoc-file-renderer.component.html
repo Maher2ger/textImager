@@ -1,0 +1,26 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <input type="text" name="textHolder" class="form-control" [disabled]="loading || disabled" placeholder="Dateinamen ändern" (ngModelChange)="updateHeadline($event)" [(ngModel)]="headline">
+    </div>
+  </div>
+
+  <div class="row mt-25">
+    <div class="col-md-12">
+      <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+      <textarea name="textHolder" class="form-control" [ngClass]="{ 'intermediate': loading }" [disabled]="loading || disabled" placeholder="Bitte füge deinen Text ein" id="" cols="30" rows="10" (ngModelChange)="updateState($event)" [(ngModel)]="inputText"></textarea>
+    </div>
+  </div>
+
+  <div class="row mt-15">
+    <div class="col-md-6">
+      <button type="button" class="btn" (click)="close()">Datei schließen</button>
+    </div>
+    <div class="col-md-6 text-right">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn" (click)="deleteElement()" [disabled]="disabled">Löschen</button>
+      </div>
+    </div>
+  </div>
+</div>

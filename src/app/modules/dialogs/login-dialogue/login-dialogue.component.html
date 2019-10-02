@@ -1,0 +1,19 @@
+<h2 mat-dialog-title class="mb-5">Login with your account</h2>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <mat-label>E-Mail</mat-label>
+    <input matInput [formControl]="username" required maxlength="255" placeholder="Enter email">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput type="password" [formControl]="password" required maxlength="255" placeholder="Enter your password">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-right">
+    <button mat-button [mat-dialog-close]="null">Schließen</button>
+    <button mat-button (click)="login()" [disabled]="(loading$ | async) || username.invalid || password.invalid">Login</button>
+  </div>
+</mat-dialog-actions>

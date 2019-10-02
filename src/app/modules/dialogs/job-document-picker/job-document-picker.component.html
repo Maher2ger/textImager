@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Wählen Sie die Dokumente</h2>
+<mat-dialog-content>
+  <div class="container-fluid mb-15">
+    <div class="row">
+      <div class="col-md-8">
+        <p class="pt-5">Bitte wählen Sie <strong>{{ (widget.documentsNeeded > 0) ? widget.documentsNeeded : 'beliebig viele' }} Dokumente</strong> um das Widget einzufügen</p>
+      </div>
+      <div class="col-md-4">
+        <!-- <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Suche..."> -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row mb-10">
+      <div class="col-md-12">
+        <input type="text" class="form-control" placeholder="Dokumentensuche..." [(ngModel)]="search" (ngModelChange)="searchChangeHandler($event)">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let document of asyncMeals | async | paginate: { id: 'server', itemsPerPage: 25, currentPage: page, totalItems: total }">
+        <mat-checkbox [checked]="documentSelected(document)" [disabled]="neededLimitReached() && !documentSelected(document)" (change)="addDocument($event, document)">{{ document.documentId }}</mat-checkbox>
+      </div>
+      <div class="col-md-12">
+        <div style="margin: 0 auto;" class="text-center">
+          <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-right">
+    <button mat-button [mat-dialog-close]="null">Schließen</button>
+    <button mat-button (click)="applyElements()" [disabled]="(!neededLimitReached() && widget.documentsNeeded > 0) || (widget.documentsNeeded < 0 && !hasDocumentSelected()) || resolving">{{ (!resolving) ? 'Abschließen' : 'Lade Ergebnisse...'}}</button>
+  </div>
+</mat-dialog-actions>

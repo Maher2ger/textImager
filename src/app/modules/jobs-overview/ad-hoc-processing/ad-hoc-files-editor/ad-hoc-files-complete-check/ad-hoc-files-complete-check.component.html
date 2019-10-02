@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h5 *ngIf="!noEmptyFiles">
+        Hinweise
+      </h5>
+
+      <div class="alert alert-secondary" role="alert" *ngIf="!noEmptyFiles">
+        Nicht alle Dateien haben einen Inhalt. Sie sollten entweder die <a [routerLink]="['./']" (click)="removeEmptyFiles()" class="cursor">leeren Dateien entfernen</a> oder den Inhalt ergänzen bevor Sie fortfahren.
+      </div>
+    </div>
+  </div>
+</div>

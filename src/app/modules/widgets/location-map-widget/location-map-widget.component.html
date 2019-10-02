@@ -1,0 +1,88 @@
+<div class="card-shadow">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12 mb-25">
+              <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: #ffffff !important;">
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                  <div class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <span class="widget-title">
+                      {{ widgetConfiguration.name }} <i class="material-icons edit-icon" (click)="changeTitle()">edit</i>
+                    </span>
+                    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" style="transform: scale(.8)" [(ngModel)]="widgetConfiguration.size" (change)="updateSize($event)">
+                      <mat-button-toggle value="col-md-4">S</mat-button-toggle>
+                      <mat-button-toggle value="col-md-6">M</mat-button-toggle>
+                      <mat-button-toggle value="col-md-8">L</mat-button-toggle>
+                      <mat-button-toggle value="col-md-12">XL</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
+                  <div class="form-inline my-2 my-lg-0">
+                    <button mat-button class="mr-10" (click)="showConfig = false; showText = !showText" [class.activeState]="showText">
+                      <i class="material-icons" style="font-size: 25px; position: relative; top: -2px;">
+                        subject
+                      </i>
+                    </button>
+      
+                    <button mat-button class="mr-10" (click)="showText = false; showConfig = !showConfig" [class.activeState]="showConfig">
+                      <i class="material-icons" style="font-size: 25px; position: relative; top: -2px;">
+                        settings
+                      </i>
+                    </button>
+      
+                    <button mat-button (click)="close()">
+                      <i class="material-icons" style="font-size: 25px; position: relative; top: -2px;">
+                        close
+                      </i>
+                    </button>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12" style="min-height: 550px;" *ngIf="!showConfig && !showText">
+              <h3 class="text-center" *ngIf="error">
+                Error parsing data!
+              </h3>
+              <aol-map [width]=" '100%' " [height]=" '100%' ">
+                    <aol-interaction-default></aol-interaction-default>
+                    <aol-view [zoom]=1   >
+                      <aol-coordinate [x]="39" [y]="45" [srid]="'EPSG:4326'"></aol-coordinate>
+                    </aol-view>
+                    <aol-layer-tile>
+                      <aol-source-osm></aol-source-osm>
+                    </aol-layer-tile>
+                    <aol-layer-vector>
+                      <aol-source-vector>
+                                    <aol-feature  *ngFor="let item of coordinates">
+                                            <aol-geometry-point>
+                                                <aol-coordinate [x]="item[1]" [y]="item[0]" [srid]="'EPSG:4326'"></aol-coordinate>
+                                            </aol-geometry-point>
+                                            <aol-style>
+                                                <aol-style-circle [radius]="5">
+                                                    <aol-style-stroke [color]="'black'" [width]="2"></aol-style-stroke>
+                                                    <aol-style-fill [color]="'green'"></aol-style-fill>
+                                                </aol-style-circle>
+                                            </aol-style>
+                                        </aol-feature>         
+                      </aol-source-vector>
+                    </aol-layer-vector>
+                   
+                  </aol-map>
+            </div>
+           
+            <div class="row" *ngIf="showText">
+              <div class="col-md-12">
+                <h4>Ausgangstext</h4>
+                <div class="p-10">
+                  {{ widgetConfiguration.selectedProcessingElements[0].rawText }}
+                </div>
+              </div>
+            </div>
+          </div>
+      
+      
+      
+      
+        </div>
+      </div>
+      

@@ -1,0 +1,25 @@
+<div *ngIf="resourceContainer.dataProcessing">
+  <hr>
+  <mat-card-content>
+    <p>
+      Verarbeitung läuft
+    </p>
+  </mat-card-content>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <hr>
+</div>
+
+<div *ngIf="resourceContainer.dataCountdown > 0">
+  <hr>
+  <mat-card-content>
+    <p>
+      Verarbeitung wird gestartet...
+    </p>
+  </mat-card-content>
+  <mat-progress-bar
+    mode="buffer"
+    [value]="getCountDownValue()"
+    [bufferValue]="getCountDownValue()">
+  </mat-progress-bar>
+  <hr>
+</div>

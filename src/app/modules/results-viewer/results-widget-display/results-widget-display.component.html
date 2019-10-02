@@ -1,0 +1,53 @@
+<div *ngIf="widgets.length <= 0" class="widgets-placeholder">
+  <div>
+    <i class="material-icons">
+      question_answer
+    </i>
+  </div>
+  Starten Sie indem Sie ein <a href="#" (click)="showWidgetDialog($event)">neues Widget auswählen</a> um den Text
+  auszuwerten
+</div>
+
+
+<div class="container-fluid" *ngIf="widgets.length > 0">
+  <div class="row">
+    <div class="col-md-12 mb-25">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+          <div class="form-inline my-2 my-lg-0">
+            <button mat-button (click)="showWidgetDialog($event)">
+              <i class="material-icons" style="font-size: 25px; position: relative; top: -2px;">
+                library_add
+              </i>
+
+              Widget hinzufügen
+            </button>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- All Widgets Rendered in overview -->
+<div *ngIf="widgets.length > 0">
+  <div class="container-fluid">
+    <div class="row">
+      <ng-container *ngFor="let widget of widgets">
+        <div class="{{ widget.size }}" app-simple-graph-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'GRAPH'"></div>
+        <div class="{{ widget.size }}" app-statistics-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'STATS'"></div>  
+        <div class="{{ widget.size }}" app-source-code-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'SOURCE'"></div>
+        <div class="{{ widget.size }}" app-multi-graph-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'GRAPH_MULTI'" [class.fullScreen]="widget.fullscreen"></div>
+        <div class="{{ widget.size }}" app-text-viewer-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'TEXT_VIEW'"></div> 
+        <div class="{{ widget.size }}" app-pie-grid-chart-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'Pie_Grid_Chart'"></div> 
+        <div class="{{ widget.size }}" app-location-map-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'LOCATION_MAP_WIDGET'"></div>
+        <div class="{{ widget.size }}" app-word-cloud-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'WORD_CLOUD_WIDGET'"></div>
+        <div class="{{ widget.size }}" app-character-frequency-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'CHARACTER_FREQUENCY_WIDGET'"></div>
+        <div class="{{ widget.size }}" app-words-length-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'WORDS_LENGTH_WIDGET'"></div>
+
+      </ng-container>
+    </div>
+  </div>
+</div>
+

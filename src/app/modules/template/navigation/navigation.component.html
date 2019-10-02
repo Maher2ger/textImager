@@ -1,0 +1,37 @@
+<nav class="navbar main-navbar navbar-expand-lg text-white corporateDesignN">
+  <div class="container-fluid">
+    <a class="navbar-brand" [routerLink]="['/']">TextImager</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto" *ngIf="!(authenticated$ | async)">
+        <li class="nav-item">
+          <span class="nav-link mr-10" style="cursor: pointer" (click)="register()">
+            Register
+          </span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link" style="cursor: pointer" (click)="login()">
+            <i class="material-icons">
+              https
+            </i>
+            Login
+          </span>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto" *ngIf="(authenticated$ | async)">
+        <li class="nav-item">
+          <a [routerLink]="['/files']" class="nav-link mr-10" style="cursor: pointer">
+            Resource Manager
+          </a>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link mr-10" style="cursor: pointer" (click)="logout()">
+            Logout
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

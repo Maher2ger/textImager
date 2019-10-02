@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mb-30">
+        <a class="btn btn-default" [routerLink]="['/']">Dokumentenbrowser schließen</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <input type="text" class="form-control" placeholder="Dokumentensuche..." [(ngModel)]="search" (ngModelChange)="searchChangeHandler($event)">
+      <p>
+        <small>Der Suchbegriff muss genau mit dem Dokumententitel übereinstimmen.</small>
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Dokumente</h3>
+
+      <ul class="list-group mb-10">
+        <li (click)="loadDetails(document)" class="list-group-item list-group-item-action flex-column cursor align-items-start" *ngFor="let document of asyncMeals | async | paginate: { id: 'server', itemsPerPage: 10, currentPage: page, totalItems: total }" [class.active]="selectedDocument?._id === document?._id">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ document.documentId }}</h5>
+          </div>
+        </li>
+      </ul>
+
+      <pagination-controls (pageChange)="getPage($event)" id="server"></pagination-controls>
+    </div>
+    <div class="col-md-8">
+      <app-long-term-document-renderer [documentInfo]="selectedDocument" [jobInfo]="job" *ngIf="selectedDocument"></app-long-term-document-renderer>
+    </div>
+  </div>
+</div>

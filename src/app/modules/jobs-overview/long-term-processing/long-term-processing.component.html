@@ -1,0 +1,36 @@
+<div class="mb-25">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ jobContainer.jobId }}
+      </mat-card-title>
+      <mat-card-subtitle *ngIf="jobContainer.jobInfo.state === 'Completed'">Completed</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="jobContainer.jobInfo.state === 'Running'">Running</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="jobContainer.jobInfo.state === 'Initializing'">Initializing</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="jobContainer.jobInfo.state === 'Completed'">
+        Auswertung abgeschlossen. <strong>{{ jobContainer.jobInfo.done }}</strong> von <strong>{{ jobContainer.jobInfo.total }}</strong> Dokumente abgeschlossen
+      </p>
+      <p *ngIf="jobContainer.jobInfo.state === 'Running'">
+        Auswertung läuft aktuell. <strong>{{ jobContainer.jobInfo.done }}</strong> von <strong>{{ jobContainer.jobInfo.total }}</strong> Dokumente abgeschlossen
+      </p>
+      <p *ngIf="jobContainer.jobInfo.state === 'Initializing'">
+        Auswertung wird gerade initialisiert...
+      </p>
+    </mat-card-content>
+
+    <!-- <app-processing-state [resourceContainer]="resourceContainer" *ngIf="resourceContainer.dataProcessing || resourceContainer.dataCountdown > 0"></app-processing-state> -->
+    <mat-card-actions>
+      <button mat-button [disabled]="disabled || jobContainer.jobInfo.state !== 'Completed'" [routerLink]="['documentBrowser', jobContainer.jobId]">Dokumente</button>
+      <button mat-button [disabled]="disabled || jobContainer.jobInfo.state !== 'Completed'" [routerLink]="['/results', 'longTerm', jobContainer.jobId]">Ergebnisse</button>
+
+      <button mat-button (click)="removeContainer()" style="float: right">
+        <mat-icon>close</mat-icon>
+      </button>
+      <button mat-button [disabled]="disabled" (click)="cancelProcessing(jobContainer)" style="float: right">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

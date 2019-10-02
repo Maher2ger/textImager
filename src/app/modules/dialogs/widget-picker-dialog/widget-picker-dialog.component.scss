@@ -1,0 +1,19 @@
+.widget-button {
+
+  padding: 15px;
+
+  &:hover {
+    cursor: pointer;
+    background: #f4f4f4;
+  }
+
+  .widget-dialog-icon {
+    i {
+      font-size: 8rem;
+    }
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+}

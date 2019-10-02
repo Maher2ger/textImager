@@ -1,0 +1,123 @@
+<style>
+  .my-drop-zone { border: dotted 3px lightgray; }
+  .nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+  .another-file-over-class { border: dotted 3px green; }
+
+  html, body { height: 100%; }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 mb-15">
+      <h3>
+        Neuen Job anlegen
+      </h3>
+      <p>Lege einen neuen Job an der im Hintergrund analysiert wird. Diese Option ist besonders geeignet für sehr aufwendige Verarbeitungstätigkeiten.</p>
+    </div>
+
+    <mat-vertical-stepper [linear]="false" #stepper>
+      <mat-step>
+        <ng-template matStepLabel>Select the input type</ng-template>
+        <div class="col-md-12">
+          <h4>
+            Select the input type
+          </h4>
+          <p>
+            Sie können hier direkt Dateien hochladen oder einen Link zu einem Archiv angeben. Das Archiv wird dann automatisch heruntergeladen und analysiert.
+          </p>
+          <mat-radio-group [(ngModel)]="jobType">
+            <mat-radio-button value="URL">URL zum Archiv</mat-radio-button>
+            <mat-radio-button value="FILES" class="ml-40">Dateien hochladen</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>
+          <span *ngIf="jobType === 'FILES'">Wähle die Dateien</span>
+          <span *ngIf="jobType === 'URL'">Gebe die URL an</span>
+        </ng-template>
+
+        <div class="col-md-12 mb-25" *ngIf="jobType === 'FILES'">
+          <h4>Wähle Dateien</h4>
+          <p>Bitte wählen Sie die Dateien die Sie analysieren möchten.</p>
+          <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/>
+
+          <p *ngIf="selectedFiles.length <= 0" class="mt-25">Noch keine Dateien ausgewählt</p>
+        </div>
+
+        <div class="col-md-12" *ngIf="selectedFiles.length > 0 && jobType === 'FILES'">
+          <p>Es wurden {{ selectedFiles.length }} Dateien zur Analyse gewählt</p>
+          <ul>
+            <li *ngFor="let file of selectedFiles">{{ file.file.name }}</li>
+          </ul>
+          <button class="btn-btn-default" (click)="selectedFiles = []">Zurücksetzen</button>
+        </div>
+
+        <div class="col-md-12" *ngIf="jobType === 'URL'">
+          <h3>Url zum Archiv</h3>
+          <p>Bitte geben Sie die URL zum Archiv an, dass analysiert werden soll.</p>
+
+          <input type="text" class="form-control" placeholder="http://...." [(ngModel)]="archiveUrl" />
+          <br/>
+          <div>
+            <small>Du kannst als Beispiel <strong>http://www.christophwestermann.de/bigdata.zip</strong> verwenden.</small>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Konfiguration bearbeiten</ng-template>
+
+        <div>
+          <mat-form-field>
+            <mat-select placeholder="Format wählen" [(ngModel)]="inputFormat">
+              <mat-option value="TXT">TXT</mat-option>
+              <mat-option value="XMI">XMI</mat-option>
+              <mat-option value="TEI">TEI</mat-option>
+              <mat-option value="TFC">TFC</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-select placeholder="Sprache wählen" [(ngModel)]="language">
+              <mat-option value="de">Deutsch</mat-option>
+              <mat-option value="eng">Englisch</mat-option>
+              <mat-option value="la">Latein</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <label>File Suffix</label>
+          <input type="text" class="form-control" placeholder="fileSuffix eingeben" [(ngModel)]="fileSuffix" /><br/>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Abschließen</ng-template>
+
+        <p>
+          Wenn du fertig bist deinen neuen Job zu konfigurieren kannst du ihn jetzt starten.
+        </p>
+
+        <div class="alert alert-warning" role="alert" *ngIf="notComplete()">
+          Folgende unvollständige Daten wurden gefunden
+
+          <ul>
+            <li *ngIf="selectedFiles.length <= 0 && jobType === 'FILES'">Keine Dateien gewählt</li>
+            <li *ngIf="!archiveUrl && jobType === 'URL'">Keine URL angeben</li>
+            <li *ngIf="!fileSuffix">File suffix nicht angegeben</li>
+          </ul>
+        </div>
+
+        <div class="col-md-12">
+          <button class="btn btn-primary" (click)="startJob()" [disabled]="notComplete() || loading">Job jetzt starten</button>
+        </div>
+
+        <div class="col-md-12 mt-10 mb-10" *ngIf="loading">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </div>
+
+</div>

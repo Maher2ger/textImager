@@ -1,0 +1,38 @@
+<div class="container-fluid" *ngIf="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="mb-30">
+        <a class="btn btn-primary" [routerLink]="['/']">Filebrowser Schließen</a>
+
+        <span *ngIf="container.languageProcessing" class="ml-15">Spracherkennung läuft...</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <h5>Dateien in der Auswertung</h5>
+
+      <div class="alert alert-secondary" role="alert" *ngIf="container.processingElements.length <= 0">
+        Diese Auswertung ist aktuell leer. Fügen Sie weitere Dateien hinzu um zu starten.
+      </div>
+
+      <ul class="list-group mb-10" *ngIf="container.processingElements.length > 0">
+        <li (click)="selectElement(processingElement)" class="list-group-item list-group-item-action flex-column cursor align-items-start" [class.disabled]="container.languageProcessing" [class.active]="selectedProcessingElement?.id === processingElement.id" *ngFor="let processingElement of container.processingElements">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{ processingElement.fileName }}</h5>
+          </div>
+          <p class="mb-1" *ngIf="processingElement.rawText">{{ processingElement.rawText?.substr(0, 100) + '...'}}</p>
+          <p class="mb-1" *ngIf="!processingElement.rawText"><em>Dieser Text ist leer</em></p>
+        </li>
+      </ul>
+
+      <button type="button" class="btn btn-default mr-10 mb-10" [disabled]="loading" (click)="addProcessingElement()">Neuen Text hinzufügen</button>
+      <button type="button" class="btn btn-default mr-10 mb-10" [disabled]="loading" (click)="loadExampleContent()">Beispieltexte laden</button>
+      <button type="button" class="btn btn-default mr-10 mb-10" [disabled]="loading" (click)="loadRandomPageContent()">Zufälligen Text von Wikipedia</button>
+    </div>
+    <div class="col-md-8">
+      <app-ad-hoc-files-complete-check (startLanguageProcessing)="languageProcessing = true"></app-ad-hoc-files-complete-check>
+      <app-ad-hoc-file-renderer [processingElement]="selectedProcessingElement" [disabled]="container.languageProcessing" [resourceContainer]="container" (fileClosed)="selectedProcessingElement = null" *ngIf="selectedProcessingElement"></app-ad-hoc-file-renderer>
+    </div>
+  </div>
+</div>

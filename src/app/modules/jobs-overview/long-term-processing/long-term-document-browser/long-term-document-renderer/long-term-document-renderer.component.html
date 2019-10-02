@@ -1,0 +1,24 @@
+<h3>
+  Document: {{ documentInfo.documentId }}
+
+  <div class="documentActions">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle value="bold" [checked]="!showXml" (click)="showXml = false;">Rendered</mat-button-toggle>
+      <mat-button-toggle value="italic" [checked]="showXml" (click)="showXml = true">Source</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</h3>
+
+<div class="spinner mt-25" *ngIf="loading"></div>
+
+<div class="mt-25" *ngIf="!loading">
+  <div class="well" *ngIf="!showXml">
+    {{ parsedResult.sofa }}
+  </div>
+
+  <div class="well" *ngIf="showXml">
+    <pre>
+    {{ documentDetails | xml }}
+  </pre>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div *ngIf="resourceContainer.languageProcessing">
+  <hr>
+  <mat-card-content>
+    <p>
+      Spracherkennung läuft
+    </p>
+  </mat-card-content>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <hr>
+</div>
+
+<div *ngIf="resourceContainer.languageCountdown > 0">
+  <hr>
+  <mat-card-content>
+    <p>
+      Spracherkennung wird gestartet...
+    </p>
+  </mat-card-content>
+  <mat-progress-bar
+    mode="buffer"
+    [value]="getCountDownValue()"
+    [bufferValue]="getCountDownValue()">
+  </mat-progress-bar>
+  <hr>
+</div>

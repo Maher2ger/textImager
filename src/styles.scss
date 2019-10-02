@@ -1,0 +1,115 @@
+// Import bootstrap 4
+@import "assets/vendors/bootstrap4/scss/bootstrap";
+
+// Import material design theme
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+// Import global styling
+@import "assets/scss/global";
+
+// Import helpers (margin, padding)
+@import "assets/scss/helper";
+
+// Initial Screen
+@import "assets/scss/initial-screen";
+
+
+html, body {
+  background: #ffffff;
+}
+
+:focus {
+  outline: none;
+}
+
+.well {
+  min-height: 20px;
+  padding: 19px;
+  margin-top: 25px;
+  margin-bottom: 80px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+
+.documentActions {
+  position: absolute;
+  right: 15px;
+  top: -10px;
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+.spinner {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+.spinner:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: spinner 1.2s linear infinite;
+}
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.sentence-holder {
+  padding: 2px 0;
+  background: #007a99;
+  color: white;
+  cursor: pointer;
+
+  &.active {
+  }
+}
+
+.sentence-wrapper {
+  line-height: 20px;
+  font-size: 14px;
+}
+
+.widgets-placeholder {
+  text-align: center;
+  padding-top: 10%;
+  font-size: 2rem;
+  color: #b4b4b4;
+
+  i {
+    font-size: 10rem;
+  }
+}
+
+.widgets-placeholder-split {
+  text-align: center;
+  padding: 25%;
+  font-size: 1.5rem;
+  color: #b4b4b4;
+
+  i {
+    font-size: 6rem;
+  }
+}
+
+.widget-preview {
+  background: #f4f4f4;
+  padding: 50px;
+  text-align: center;
+}
+
+.toggled {
+  background: #ded9d9;
+}

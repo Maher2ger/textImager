@@ -1,0 +1,109 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3 full-height-col">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="lds-ellipsis block" *ngIf="nodesLoading"><div></div><div></div><div></div><div></div></div>
+
+          <div *ngIf="!nodesLoading">
+            <mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl">
+              <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                <div>
+                  <button mat-icon-button disabled>
+                    <mat-icon>
+                      remove
+                    </mat-icon>
+                  </button>
+                  <button mat-button (click)="addTextToSelection(node)">
+                    {{node.filename}}
+                  </button>
+                </div>
+              </mat-tree-node>
+
+              <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+                <div class="mat-tree-node">
+                  <button mat-icon-button matTreeNodeToggle matTreeNodePadding (click)="loadChildren(node, nestedTreeControl.isExpanded(node))">
+                    <mat-icon>
+                      {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                    </mat-icon>
+                  </button>
+
+                  <button mat-button (click)="addTextToSelection(node)">
+                    {{node.filename}} <div class="lds-ellipsis inline" *ngIf="node.loading"><div></div><div></div><div></div><div></div></div>
+                  </button>
+                </div>
+                <ul [hidden]="!nestedTreeControl.isExpanded(node)">
+                  <ng-container matTreeNodeOutlet></ng-container>
+                </ul>
+              </mat-nested-tree-node>
+            </mat-tree>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 full-height-col">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="lds-ellipsis block" *ngIf="filesLoading"><div></div><div></div><div></div><div></div></div>
+
+          <div class="mt-25 text-center" *ngIf="!selectedNode && !filesLoading">
+            <h4>Wählen Sie einen Ordner auf der linken Seite</h4>
+          </div>
+
+          <div class="mt-25 text-center" *ngIf="selectedNode && files.length <= 0 && !filesLoading">
+            <h4>Dieser Ordner ist leer</h4>
+          </div>
+
+          <table id="example" class="table table-striped" *ngIf="files.length > 0 && !filesLoading">
+            <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col" (click)="setFilter('file')" style="cursor: pointer">
+                <i class="fa" [ngClass]="getArrowClass()" *ngIf="sorting.attr === 'file'"></i> File
+              </th>
+              <th scope="col" (click)="setFilter('uri')" style="cursor: pointer">
+                <i class="fa" [ngClass]="getArrowClass()" *ngIf="sorting.attr === 'uri'"></i> URI
+              </th>
+              <th scope="col" (click)="setFilter('mime')" style="cursor: pointer">
+                <i class="fa" [ngClass]="getArrowClass()" *ngIf="sorting.attr === 'mime'"></i> Mimetype
+              </th>
+              <th scope="col" (click)="setFilter('created')" style="cursor: pointer">
+                <i class="fa" [ngClass]="getArrowClass()" *ngIf="sorting.attr === 'created'"></i> Created
+              </th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let file of files">
+              <td class="checkbox-inline adapt">
+                <input type="checkbox" [(ngModel)]="file.selected">
+              </td>
+              <td>{{file.name}}</td>
+              <td>{{file.uri}}</td>
+              <td>{{file.mime}}</td>
+              <td>{{file.created}}</td>
+              <td><a [href]="file.download" target="_blank"><i class="fa fa-download"></i></a></td>
+            </tr>
+            </tbody>
+            <tfoot *ngIf="files.length > 0">
+            <tr>
+              <td colspan="3" class="text-left">
+                <small *ngIf="selectedFiles() > 0">
+                  {{ selectedFiles() }} Dateien gewählt
+                </small>
+
+                <button class="btn btn-small btn-danger" *ngIf="selectedFiles() > 0" (click)="deleteFiles()" style="line-height: 1; margin-left: 15px;">Delete {{ selectedFiles() }} Files</button>
+
+                <!-- <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/> -->
+              </td>
+              <td colspan="3" class="text-right">
+                <small>Displaying 1-{{ files.length }} of {{ totalFiles }}</small>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

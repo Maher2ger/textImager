@@ -1,0 +1,40 @@
+<h2 mat-dialog-title class="mb-5">Set up a new account</h2>
+<mat-dialog-content>
+
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [formControl]="name" placeholder="Enter name">
+    <mat-hint>Enter your last name</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Vornamen</mat-label>
+    <input matInput [formControl]="firstName" placeholder="Enter first name">
+    <mat-hint>Enter your first name</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Affiliation</mat-label>
+    <input matInput [formControl]="affiliation" placeholder="Enter affiliation">
+    <mat-hint>What is your affiliation</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>E-Mail</mat-label>
+    <input matInput [formControl]="email" placeholder="Enter email">
+    <mat-hint>Provide your email</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Reason</mat-label>
+    <input matInput [formControl]="reason" placeholder="Enter a reason">
+    <mat-hint>Why are you registering</mat-hint>
+  </mat-form-field>
+  <div class="mt-15">After finishing the registration we will check the information</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-right">
+    <button mat-button [mat-dialog-close]="null">Schließen</button>
+    <button mat-button (click)="register()" [disabled]="incomplete() || (loading$ | async)">Speichern</button>
+  </div>
+</mat-dialog-actions>

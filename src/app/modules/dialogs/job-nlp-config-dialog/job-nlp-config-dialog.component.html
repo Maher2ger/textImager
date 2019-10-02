@@ -1,0 +1,128 @@
+<h2 mat-dialog-title>NLP Konfiguration</h2>
+<mat-dialog-content>
+  <div class="container-fluid p-15">
+    <div class="row mb-15">
+      <div class="col-md-4">
+        <h6>Tokenizer</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.tokenizer" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'PolyglotTokenizer'">PolyglotTokenizer</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'SpaCyTokenizer'">SpaCyTokenizer</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'LanguageToolSegmenter'">LanguageToolSegmenter</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'OpenNlpSegmenter'">OpenNlpSegmenter</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-4">
+        <h6>Lemmatizer</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.lemmatizer" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'MateLemmatizer'">MateLemmatizer</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'MarMoTLemma'">MarMoTLemma</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'LanguageToolLemmatizer'">LanguageToolLemmatizer</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-4">
+        <h6>Parser</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.parser" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'StanfordParser'">StanfordParser</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'BerkeleyParser'">BerkeleyParser</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'MateParser'">MateParser</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="row mb-15">
+      <div class="col-md-4">
+        <h6>Pos</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.pos" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'StanfordPosTagger'">StanfordPosTagger</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'MarMoTTagger'">MarMoTTagger</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'HunPosTagger'">HunPosTagger</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'MatePosTagger'">MatePosTagger</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'OpenNlpPosTagger'">OpenNlpPosTagger</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'PolyglotPartOfSpeech'">PolyglotPartOfSpeech</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-4">
+        <h6>Ner</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.ner" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'StanfordNameEntityRecogn'">StanfordNameEntityRecogn</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'PolyglottNamedEntity'">PolyglottNamedEntity</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'NeuralNER'">NeuralNER</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-4">
+        <h6>Sentiment</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.sentiment" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'Sentiws'">Sentiws</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'PolyglotSentiment'">PolyglotSentiment</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="row mb-15">
+      <div class="col-md-4">
+        <h6>Ddc</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.ddc" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'FastTextDDC3'">FastTextDDC3</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'FastTextDDC2'">FastTextDDC2</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-4">
+        <h6>Morphology</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.morphology" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'PolyglotMorphology'">PolyglotMorphology</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'MateMorphTagger'">MateMorphTagger</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-4">
+        <h6>Similiraty</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.similarity" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'WordNGramJaccardMeasure'">WordNGramJaccardMeasure</mat-radio-button>
+          <mat-radio-button class="example-radio-button" [value]="'CosineSimilarity'">CosineSimilarity</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="row mb-15">
+      <div class="col-md-4">
+        <h6>Time</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.time" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'HeidelTime'">HeidelTime</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-4">
+        <h6>Deeplearning</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.deeplearning" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'W2V'">W2V</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-4">
+        <h6>Disambiguation</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.disambiguation" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'FastTextDisambig'">FastTextDisambig</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h6>Wikify</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.wikify" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'IXAWikify'">IXAWikify</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="col-md-4">
+        <h6>ParagraphSplitter</h6>
+        <mat-radio-group class="example-radio-group" [(ngModel)]="nlpConfig.paragraphSplitter" (change)="updateNlpConfig($event)">
+          <mat-radio-button class="example-radio-button" [value]="'ParagraphSplitter'">ParagraphSplitter</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-right">
+    <button mat-button [mat-dialog-close]="null">Schließen</button>
+    <button mat-button (click)="close()">Speichern</button>
+  </div>
+</mat-dialog-actions>

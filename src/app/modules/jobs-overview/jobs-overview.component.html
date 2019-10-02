@@ -1,0 +1,47 @@
+
+<div class="container">
+  <div class="row mb-25">
+    <div class="col-md-12">
+      <h3>Ad-Hoc Auswertungen</h3>
+    </div>
+    <div class="col-md-12">
+      <button class="btn btn-primary" (click)="addContainer()">Neue Auswertung starten</button>
+
+      <label class="btn btn-secondary mb-0 ml-15">
+        Auswertung importieren <input type="file" (change)="import($event)" hidden/>
+      </label>
+    </div>
+  </div>
+  <div class="row mb-45">
+    <div class="col-md-6" *ngFor="let container of (resourceContainer$ | async)">
+      <app-ad-hoc-processing [resourceContainer]="container"></app-ad-hoc-processing>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!!(authenticated$ | async)">
+  <div class="row mb-15">
+    <div class="col-md-12">
+      <h3>Job Auswertungen</h3>
+
+      <button mat-button [disabled]="loadingJobs" (click)="refresh()" style="position: absolute; right: 10px; top: 12px;">
+        <mat-icon [class.rotating]="refreshing">refresh</mat-icon>
+      </button>
+    </div>
+    <div class="col-md-12 mb-15">
+      <button class="btn btn-primary" [routerLink]="['/jobs', 'create']">Neuen Job starten</button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="loadingJobs">
+    <div class="col-md-12">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+  </div>
+
+  <div class="row mb-45">
+    <div class="col-md-6" *ngFor="let job of (jobs$ | async)">
+      <app-long-term-processing [jobContainer]="job"></app-long-term-processing>
+    </div>
+  </div>
+</div>

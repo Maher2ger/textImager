@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Wählen Sie ein Widget</h2>
+<mat-dialog-content>
+  <div class="container-fluid p-15">
+    <div class="row mb-15">
+      <div class="col-md-4 text-center" *ngFor="let widget of widgets">
+        <div class="widget-button" (click)="apply(widget)">
+          <div class="widget-dialog-icon">
+            <i class="material-icons">
+              {{ widget.icon }}
+            </i>
+          </div>
+          <h3>{{ widget.name }}</h3>
+          <p class="mb-0">{{ widget.text }}</p>
+          <small *ngIf="widget.requiredDocuments > 0">Auswertung für {{ widget.requiredDocuments }} Dokument(e)</small>
+          <small *ngIf="widget.requiredDocuments < 0">Beliebig viele Dokumente</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-right">
+    <button mat-button [mat-dialog-close]="null">Schließen</button>
+  </div>
+</mat-dialog-actions>

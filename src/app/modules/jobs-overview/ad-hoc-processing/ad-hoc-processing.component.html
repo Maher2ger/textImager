@@ -1,0 +1,32 @@
+<div class="mb-25">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ resourceContainer.title }}</mat-card-title>
+      <mat-card-subtitle><div [innerHtml]="getLanguageDetectionFlag()"></div></mat-card-subtitle>
+      <mat-card-subtitle>{{ hasCompletedNlpConfiguration() ? 'NLP Konfiguration abgeschlossen' : 'NLP Konfiguration noch offen' }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="resourceContainer.processingElements.length > 0">
+        Die Auswertung enthält aktuell {{ resourceContainer.processingElements.length }} Datei(en)
+      </p>
+      <p *ngIf="resourceContainer.processingElements.length <= 0">
+        Diese Auswertung ist aktuell leer
+      </p>
+    </mat-card-content>
+    <app-ad-hoc-language-state [resourceContainer]="resourceContainer" *ngIf="resourceContainer.languageProcessing || resourceContainer.languageCountdown > 0"></app-ad-hoc-language-state>
+    <app-ad-hoc-processing-state [resourceContainer]="resourceContainer" *ngIf="resourceContainer.dataProcessing || resourceContainer.dataCountdown > 0"></app-ad-hoc-processing-state>
+    <mat-card-actions>
+      <button mat-button [routerLink]="['fileBrowser', resourceContainer.id]">Filebrowser</button>
+      <button mat-button (click)="openNlpConfig(resourceContainer)" [disabled]="!isReadyForNlp()">NLP Config</button>
+      <button mat-button (click)="startProcessing(resourceContainer)" [disabled]="!hasCompletedLanguageDetection() || !hasCompletedNlpConfiguration()" *ngIf="!resourceContainer.dataProcessed && !resourceContainer.dataProcessing">Auswerten</button>
+      <button mat-stroked-button color="primary" [routerLink]="['/results', 'adHoc', resourceContainer.id]" [disabled]="!hasCompletedLanguageDetection() || !hasCompletedNlpConfiguration() || resourceContainer.dataProcessing" *ngIf="resourceContainer.dataProcessed">Ergebnisse</button>
+
+      <button mat-button (click)="saveContainer(resourceContainer.id)" style="float: right">
+        <mat-icon>save</mat-icon>
+      </button>
+      <button mat-button (click)="removeContainer()" style="float: right">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

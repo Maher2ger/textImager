@@ -1,0 +1,2 @@
+1. Frequency of characters (erledigt)
+2. Length of Words

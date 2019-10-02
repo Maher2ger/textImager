@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Wählen Sie die Dokumente</h2>
+<mat-dialog-content>
+  <div class="container-fluid mb-15">
+    <div class="row">
+      <div class="col-md-8">
+        <p class="pt-5">Bitte wählen Sie <strong>{{ (widget.documentsNeeded > 0) ? widget.documentsNeeded : 'beliebig viele' }} Dokumente</strong> um das Widget einzufügen</p>
+      </div>
+      <div class="col-md-4">
+        <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Suche...">
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let element of availableProcessingElements | filterByImpure: ['element.fileName'] : searchString">
+        <mat-checkbox [(ngModel)]="element.picked" [disabled]="neededLimitReached() && !element.picked">{{ element.element.fileName }}</mat-checkbox>
+      </div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="text-right">
+    <button mat-button [mat-dialog-close]="null">Schließen</button>
+    <button mat-button (click)="applyElements()" [disabled]="(!neededLimitReached() && widget.documentsNeeded > 0) || (widget.documentsNeeded < 0 && !hasDocumentSelected())">Abschließen</button>
+  </div>
+</mat-dialog-actions>
