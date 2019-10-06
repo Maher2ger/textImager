@@ -29,7 +29,9 @@ export class ProcessingService {
     const formData = new FormData();
 
     for (let i = 0; i < documents.length; i++) {
-      formData.append(`file[${i}]`, new File([new Blob([documents[i].rawText])], documents[i].fileName));
+      formData.append(`file[${i}]`,
+          new File([new Blob([documents[i].rawText])],
+              documents[i].fileName));
     }
 
     return formData;
@@ -54,6 +56,36 @@ export class ProcessingService {
 
     if (container.nlpConfig.sentiment) {
       url = url + '&pipeline=' + container.nlpConfig.sentiment;
+    }
+    if (container.nlpConfig.ner) {
+      url = url + '&pipeline=' + container.nlpConfig.ner;
+    }
+    if (container.nlpConfig.misc) {
+      url = url + '&pipeline=' + container.nlpConfig.misc;
+    }
+    if (container.nlpConfig.time) {
+      url = url + '&pipeline=' + container.nlpConfig.time;
+    }
+    if (container.nlpConfig.ddc) {
+      url = url + '&pipeline=' + container.nlpConfig.ddc;
+    }
+    if (container.nlpConfig.deeplearning) {
+      url = url + '&pipeline=' + container.nlpConfig.deeplearning;
+    }
+    if (container.nlpConfig.disambiguation) {
+      url = url + '&pipeline=' + container.nlpConfig.disambiguation;
+    }
+    if (container.nlpConfig.morphology) {
+      url = url + '&pipeline=' + container.nlpConfig.morphology;
+    }
+    if (container.nlpConfig.similarity) {
+      url = url + '&pipeline=' + container.nlpConfig.similarity;
+    }
+    if (container.nlpConfig.wikify) {
+      url = url + '&pipeline=' + container.nlpConfig.wikify;
+    }
+    if (container.nlpConfig.paragraphSplitter) {
+      url = url + '&pipeline=' + container.nlpConfig.paragraphSplitter;
     }
 
     return this.appendOutputFormat(url);
