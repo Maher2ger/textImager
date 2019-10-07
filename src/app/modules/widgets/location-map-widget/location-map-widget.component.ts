@@ -34,7 +34,6 @@ export class LocationMapWidgetComponent implements OnInit {
                 }
 
             }
-            console.log(this.LocationNameList);
     }
 
     fetchData(city){
@@ -57,7 +56,7 @@ export class LocationMapWidgetComponent implements OnInit {
         var locationsList = this.LocationNameList.filter(function(elem, index, self) {
                 return index === self.indexOf(elem);
                 });
-        console.log(this.LocationNameList);
+
         console.log(locationsList);
         for (let name of locationsList){
             this.fetchData(name);

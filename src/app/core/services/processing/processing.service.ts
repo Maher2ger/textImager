@@ -33,7 +33,6 @@ export class ProcessingService {
           new File([new Blob([documents[i].rawText])],
               documents[i].fileName));
     }
-
     return formData;
   }
 

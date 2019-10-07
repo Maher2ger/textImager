@@ -60,6 +60,8 @@ export class LongTermProcessingCreateComponent implements OnInit {
     for (let i = 0; i < this.selectedFiles.length; i++) {
       this.formData.append(`file[${i}]`, this.selectedFiles[i]);
     }
+
+
   }
 
   notComplete() {
