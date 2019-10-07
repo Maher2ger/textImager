@@ -114,12 +114,13 @@ export class WidgetsService {
   initWidgetOverview(resultViewerMode: any) {
     if (resultViewerMode.type === 'AD_HOC') {
       const container: ResourceContainer = this.containerService.getResourceContainerById(resultViewerMode.id);
-      this.store.dispatch(new AddResultWidget({widget: this.applyElements(this.buildWidgetReference(widgetsAvailable[0]), [container.processingElements[0]])}));
+      if (!isNullOrUndefined(container)) {
+              this.store.dispatch(new AddResultWidget({widget: this.applyElements(this.buildWidgetReference(widgetsAvailable[0]), [container.processingElements[0]])}));
 
       if (container.processingElements.length > 2) {
         this.store.dispatch(new AddResultWidget({widget: this.applyElements(this.buildWidgetReference(widgetsAvailable[2]), [container.processingElements[0], container.processingElements[1], container.processingElements[2]])}));
       }
-
+      }
       return of(true);
     } else {
       this.bigDataService.listJobDocuments(resultViewerMode.id, 5, 0, null)
@@ -209,7 +210,7 @@ export class WidgetsService {
     };
   }
 
-  private resolveProcessingResult(metadata: { id, fileName }, result: { begin, containerId, end, lemma, paragraph, sentence, sofa, token }) {
+  private resolveProcessingResult(metadata: { id, fileName }, result: { begin, containerId, end, lemma, paragraph, sentence, sofa, token, location }) {
 
     return {
       id: metadata.id,
@@ -224,13 +225,14 @@ export class WidgetsService {
         paragraph: result.paragraph,
         sentence: result.sentence,
         lemma: result.lemma,
-        token: result.token
+        token: result.token,
+        location: result.location
       }
     };
   }
 
 
-  private resolveTokens(parseResultFromJson: { containerId: string; begin: number; end: number; sofa: string; paragraph: any[]; sentence: any[]; lemma: any[]; token: any[] }) {
+  private resolveTokens(parseResultFromJson: { containerId: string; begin: number; end: number; sofa: string; paragraph: any[]; sentence: any[]; lemma: any[]; token: any[]; location: any[] }) {
     for (let i = 0; i < parseResultFromJson.token.length; i++) {
       parseResultFromJson.token[i].value = parseResultFromJson.sofa.substr(parseResultFromJson.token[i].begin, parseResultFromJson.token[i].end);
     }

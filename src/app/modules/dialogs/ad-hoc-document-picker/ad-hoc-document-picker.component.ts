@@ -96,6 +96,14 @@ export class AdHocDocumentPickerComponent implements OnInit {
         );
       }
 
+      for (let i = 0; i < processingElement.result.location.length; i++) {
+        processingElement.result.token[i].value = this.dataService.getSubStrFromCompleteTextByBeginAndEnd(
+          processingElement.result.token[i].begin,
+          processingElement.result.token[i].end,
+          processingElement.result.sofa
+        );
+      }
+
       this.widget.selectedProcessingElements.push(processingElement);
 
       this.ref.close(this.widget);

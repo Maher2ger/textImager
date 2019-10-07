@@ -14,8 +14,10 @@ export class DataService {
     const parser = new DOMParser();
 
     const xmlDocument = parser.parseFromString(xmlResponse, 'text/xml');
-
+    console.log("------------------------------------");
     console.log(xmlDocument);
+    console.log("------------------------------------");
+
 
     let processingResult = this.buildEmptyProcessingResult(0, 0, id);
 
@@ -23,7 +25,7 @@ export class DataService {
     processingResult = this.addResultsForTagNew(tokenPrefix + ':Paragraph', 'paragraph', processingResult, xmlDocument);
     processingResult = this.addResultsForTagNew(tokenPrefix + ':Lemma', 'lemma', processingResult, xmlDocument);
     processingResult = this.addResultsForTagNew(tokenPrefix + ':Token', 'token', processingResult, xmlDocument);
-    processingResult = this.addResultsForTagNew(tokenPrefix + ':Location', 'location', processingResult, xmlDocument);
+    processingResult = this.addResultsForTagNew('type5' + ':Location', 'location', processingResult, xmlDocument);
 
     const sofas = xmlDocument.getElementsByTagName('cas:Sofa');
 

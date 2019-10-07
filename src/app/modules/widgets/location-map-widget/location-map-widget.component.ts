@@ -25,23 +25,26 @@ export class LocationMapWidgetComponent implements OnInit {
     }
 
     loadLocations () {
+            var theText = this.widgetConfiguration.selectedProcessingElements[0].rawText;
             var locationsList = this.widgetConfiguration.selectedProcessingElements[0].result.location;
-            console.log();
-            for (let x = 0; x <locationsList.length; x++) {
-                if (!this.isUndefined(locationsList[x].value)) {
-                    this.LocationNameList.push(locationsList[x].value);
+            for (let x = 0; x < locationsList.length; x++) {
+                if (!this.isUndefined(locationsList[x])) {
+                    let loc = theText.substring(locationsList[x].begin - 1, locationsList[x].end);
+                    this.LocationNameList.push(loc);
                 }
 
             }
+            console.log(this.LocationNameList);
     }
 
     fetchData(city){
       var startPoint = "http://open.mapquestapi.com/nominatim/v1/search.php?key=ox99Q2eWA9sZcYsG2ub61PDCmA3WAOaa&format=json&q=";
       var EndPoint = "&addressdetails=0&limit=1";
       this.http.get(startPoint+city+EndPoint).subscribe(
-        (data) =>{
-          this.coordinates.push([+data[0]['lat'],+data[0]['lon']]);
-
+        (data) => {
+            if (!this.isUndefined(data[0])) {
+          this.coordinates.push([+data[0]['lat'], +data[0]['lon']]);
+          }
       }
         );
 
@@ -51,7 +54,12 @@ export class LocationMapWidgetComponent implements OnInit {
 
     fetchLocation() {
         this.loadLocations();
-        for (let name of this.LocationNameList){
+        var locationsList = this.LocationNameList.filter(function(elem, index, self) {
+                return index === self.indexOf(elem);
+                });
+        console.log(this.LocationNameList);
+        console.log(locationsList);
+        for (let name of locationsList){
             this.fetchData(name);
         }
       }
@@ -63,7 +71,7 @@ export class LocationMapWidgetComponent implements OnInit {
     }
 
     ngOnInit() {
-    this.render();
+
   }
 
     ngOnChanges(changes) {
