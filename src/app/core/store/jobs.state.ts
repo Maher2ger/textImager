@@ -167,7 +167,7 @@ export class JobsState {
     };
   }
 
-  private resolveTokens(parseResultFromJson: { containerId: string; begin: number; end: number; sofa: string; paragraph: any[]; sentence: any[]; lemma: any[]; token: any[]; location: any[] }) {
+  private resolveTokens(parseResultFromJson: { containerId: string; begin: number; end: number; sofa: string; paragraph: any[]; sentence: any[]; lemma: any[]; token: any[]; location: any[]; timex3: any[] }) {
     for (let i = 0; i < parseResultFromJson.token.length; i++) {
       parseResultFromJson.token[i].value = parseResultFromJson.sofa.substr(parseResultFromJson.token[i].begin, parseResultFromJson.token[i].end);
     }

@@ -209,8 +209,8 @@ export class WidgetsService {
       fullscreen: false
     };
   }
-
-  private resolveProcessingResult(metadata: { id, fileName }, result: { begin, containerId, end, lemma, paragraph, sentence, sofa, token, location }) {
+  // toNlpKonfinguration
+  private resolveProcessingResult(metadata: { id, fileName }, result: { begin, containerId, end, lemma, paragraph, sentence, sofa, token, location, timex3 }) {
 
     return {
       id: metadata.id,
@@ -226,13 +226,14 @@ export class WidgetsService {
         sentence: result.sentence,
         lemma: result.lemma,
         token: result.token,
-        location: result.location
+        location: result.location,
+        timex3: result.timex3
       }
     };
   }
 
-
-  private resolveTokens(parseResultFromJson: { containerId: string; begin: number; end: number; sofa: string; paragraph: any[]; sentence: any[]; lemma: any[]; token: any[]; location: any[] }) {
+  // toNlpKonfinguration
+  private resolveTokens(parseResultFromJson: { containerId: string; begin: number; end: number; sofa: string; paragraph: any[]; sentence: any[]; lemma: any[]; token: any[]; location: any[], timex3: any[] }) {
     for (let i = 0; i < parseResultFromJson.token.length; i++) {
       parseResultFromJson.token[i].value = parseResultFromJson.sofa.substr(parseResultFromJson.token[i].begin, parseResultFromJson.token[i].end);
     }
