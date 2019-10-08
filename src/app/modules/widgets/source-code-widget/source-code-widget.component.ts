@@ -13,6 +13,8 @@ import {WidgetsService} from '../../../core/services/common/widgets.service';
 export class SourceCodeWidgetComponent implements OnInit {
 
   @Input() widgetConfiguration: WidgetConfiguration;
+  showConfig = false;
+  showText = false;
 
   constructor(private store: Store, private widgetService: WidgetsService) {
   }

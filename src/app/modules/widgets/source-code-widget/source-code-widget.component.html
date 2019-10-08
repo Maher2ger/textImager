@@ -16,6 +16,17 @@
               </mat-button-toggle-group>
             </div>
             <div class="form-inline my-2 my-lg-0">
+              <button mat-button class="mr-10" (click)="showConfig = false; showText = !showText" [class.activeState]="showText">
+                <i class="material-icons" style="font-size: 25px; position: relative; top: -2px;">
+                  subject
+                </i>
+              </button>
+
+              <button mat-button class="mr-10" (click)="showText = false; showConfig = !showConfig" [class.activeState]="showConfig">
+                <i class="material-icons" style="font-size: 25px; position: relative; top: -2px;">
+                  settings
+                </i>
+              </button>
               <button mat-button (click)="close()">
                 <i class="material-icons" style="font-size: 25px; position: relative; top: -2px;">
                   close
@@ -27,7 +38,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12 mb-25">
+      <div class="col-md-12 mb-25" *ngIf="!showConfig && !showText">
         <div class="well">
         <pre>
           {{ widgetConfiguration.selectedProcessingElements[0].result | json }}
@@ -35,5 +46,13 @@
         </div>
       </div>
     </div>
+    <div class="row" *ngIf="showText">
+        <div class="col-md-12">
+          <h4>Ausgangstext</h4>
+          <div class="p-10">
+            {{ widgetConfiguration.selectedProcessingElements[0].rawText }}
+          </div>
+        </div>
+      </div>
   </div>
 </div>
