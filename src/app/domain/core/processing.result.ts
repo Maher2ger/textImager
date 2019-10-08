@@ -1,4 +1,5 @@
 import {AbstractXmlNodeObject} from './abstract.xml.node.object';
+import {AbstractXmlNodeTimeObject} from './abstract.xml.node.object';
 
 export interface ProcessingResult {
 
@@ -12,5 +13,6 @@ export interface ProcessingResult {
   lemma: AbstractXmlNodeObject[];
   token: AbstractXmlNodeObject[];
   location: AbstractXmlNodeObject[];
+  timex3: AbstractXmlNodeObject[];
 
 }

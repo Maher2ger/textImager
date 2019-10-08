@@ -10,6 +10,7 @@ export class DataService {
   constructor() {
   }
 
+  // toNlpKonfinguration
   parseResultFromJson(xmlResponse, id, tokenPrefix, metadataPrefix) {
     const parser = new DOMParser();
 
@@ -26,6 +27,7 @@ export class DataService {
     processingResult = this.addResultsForTagNew(tokenPrefix + ':Lemma', 'lemma', processingResult, xmlDocument);
     processingResult = this.addResultsForTagNew(tokenPrefix + ':Token', 'token', processingResult, xmlDocument);
     processingResult = this.addResultsForTagNew('type5' + ':Location', 'location', processingResult, xmlDocument);
+    processingResult = this.addTimeToProcessingResult('heideltime' + ':Timex3', 'timex3', processingResult, xmlDocument);
 
     const sofas = xmlDocument.getElementsByTagName('cas:Sofa');
 
@@ -61,6 +63,14 @@ export class DataService {
     return processingResult;
   }
 
+  private addTimeToProcessingResult(tag: string, attr: string, processingResult: ProcessingResult, xmlDocument) {
+    for (const xmlNode of this.getTagsNew(xmlDocument, tag)) {
+      processingResult[attr].push(this.buildAbstractTimeNode(xmlNode));
+    }
+
+    return processingResult;
+  }
+
 
   getTagsNew(xmlDocument: any, tag: string) {
     return xmlDocument.getElementsByTagName(tag);
@@ -82,6 +92,7 @@ export class DataService {
   //
   // private methods
 
+  // toNlpKonfinguration
   private buildEmptyProcessingResult(begin: number, end: number, id: string) {
     return {
       containerId: id,
@@ -92,15 +103,28 @@ export class DataService {
       sentence: [],
       lemma: [],
       token: [],
-      location: []
+      location: [],
+      timex3: []
     };
   }
 
+  // toNlpKonfinguration
   private buildAbstractNode(xmlNode: any) {
     return {
       begin: (xmlNode['attributes']['begin']) ? parseInt(xmlNode['attributes']['begin']['value'], 10) : null,
       end: (xmlNode['attributes']['end']) ? parseInt(xmlNode['attributes']['end']['value'], 10) : null,
       value: (xmlNode['attributes']['value']) ? xmlNode['attributes']['value']['value'] : null,
+      sofa: (xmlNode['attributes']['sofa']) ? parseInt(xmlNode['attributes']['sofa']['value'], 10) : null,
+      id: (xmlNode['attributes']['id']) ? parseInt(xmlNode['attributes']['id']['value'], 10) : null,
+    };
+  }
+
+  private buildAbstractTimeNode(xmlNode: any) {
+    return {
+      begin: (xmlNode['attributes']['begin']) ? parseInt(xmlNode['attributes']['begin']['value'], 10) : null,
+      end: (xmlNode['attributes']['end']) ? parseInt(xmlNode['attributes']['end']['value'], 10) : null,
+      value: (xmlNode['attributes']['timexValue']) ? xmlNode['attributes']['timexValue']['value'] : null,
+      type: (xmlNode['attributes']['timexType']) ? xmlNode['attributes']['timexType']['value'] : null,
       sofa: (xmlNode['attributes']['sofa']) ? parseInt(xmlNode['attributes']['sofa']['value'], 10) : null,
       id: (xmlNode['attributes']['id']) ? parseInt(xmlNode['attributes']['id']['value'], 10) : null,
     };

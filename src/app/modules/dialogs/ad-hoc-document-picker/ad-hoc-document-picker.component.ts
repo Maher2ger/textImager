@@ -104,6 +104,8 @@ export class AdHocDocumentPickerComponent implements OnInit {
         );
       }
 
+      // toNlpKonfinguration
+
       this.widget.selectedProcessingElements.push(processingElement);
 
       this.ref.close(this.widget);
