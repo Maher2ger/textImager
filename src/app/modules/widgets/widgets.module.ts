@@ -18,6 +18,7 @@ import {AgWordCloudModule, AgWordCloudData} from 'angular4-word-cloud';
 import { CharacterFrequencyWidgetComponent } from './character-frequency-widget/character-frequency-widget.component';
 import { WordsLengthWidgetComponent } from './words-length-widget/words-length-widget.component';
 import {WordsFrequencyService} from '../../shared/services/words-frequency.service';
+import { TimeWidgetComponent } from './time-widget/time-widget.component';
 
  
 @NgModule({
@@ -43,6 +44,7 @@ import {WordsFrequencyService} from '../../shared/services/words-frequency.servi
     WordCloudWidgetComponent,
     CharacterFrequencyWidgetComponent,
     WordsLengthWidgetComponent,
+    TimeWidgetComponent,
       ],
   exports: [
     StatisticsWidgetComponent,
@@ -54,7 +56,8 @@ import {WordsFrequencyService} from '../../shared/services/words-frequency.servi
     LocationMapWidgetComponent,
     WordCloudWidgetComponent,
     CharacterFrequencyWidgetComponent,
-    WordsLengthWidgetComponent
+    WordsLengthWidgetComponent,
+    TimeWidgetComponent,
   ],
   providers : []
 })

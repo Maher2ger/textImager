@@ -13,6 +13,6 @@ export interface ProcessingResult {
   lemma: AbstractXmlNodeObject[];
   token: AbstractXmlNodeObject[];
   location: AbstractXmlNodeObject[];
-  timex3: AbstractXmlNodeObject[];
+  timex3: AbstractXmlNodeTimeObject[];
 
 }

@@ -45,6 +45,8 @@
         <div class="{{ widget.size }}" app-word-cloud-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'WORD_CLOUD_WIDGET'"></div>
         <div class="{{ widget.size }}" app-character-frequency-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'CHARACTER_FREQUENCY_WIDGET'"></div>
         <div class="{{ widget.size }}" app-words-length-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'WORDS_LENGTH_WIDGET'"></div>
+        <div class="{{ widget.size }}" app-time-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'TIME_WIDGET'"></div>
+
 
       </ng-container>
     </div>

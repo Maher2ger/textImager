@@ -11,7 +11,6 @@ import {ChangeDetectionStrategy} from '@angular/core';
   selector: '[app-word-cloud-widget]',
   templateUrl: './word-cloud-widget.component.html',
   styleUrls: ['./word-cloud-widget.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [WordsFrequencyService]
 })
 export class WordCloudWidgetComponent implements OnInit, OnChanges {
@@ -23,9 +22,9 @@ export class WordCloudWidgetComponent implements OnInit, OnChanges {
   error = false;
   wordList;
   options;
+
   constructor(private store: Store,
-              private widgetService: WidgetsService,
-              private wordsFrequencyService: WordsFrequencyService) {
+              private widgetService: WidgetsService) {
     this.options = {
         settings: {
         minFontSize: 40,
@@ -106,6 +105,7 @@ export class WordCloudWidgetComponent implements OnInit, OnChanges {
   private render() {
     this.wordList = this.ParseWordsList();
   }
+
 
 
 

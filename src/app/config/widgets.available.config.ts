@@ -89,4 +89,13 @@ export const widgetsAvailable = [
     sizesAvailable: ['S', 'M', 'L', 'XL'],
     requiredDocuments: 3
   },
+    {
+    key: 'TIME_WIDGET',
+    name: 'Times in Text Widget',
+    text: 'Die Zeiten im Text zeigen',
+    icon: 'timeline',
+    defaultSize: 'col-md-6',
+    sizesAvailable: ['S', 'M', 'L', 'XL'],
+    requiredDocuments: 1
+  },
 ];

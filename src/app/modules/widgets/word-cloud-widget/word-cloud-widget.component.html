@@ -9,11 +9,11 @@
               <span class="widget-title">
                 {{ widgetConfiguration.name }} <i class="material-icons edit-icon" (click)="changeTitle()">edit</i>
               </span>
-              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" style="transform: scale(.8)" [(ngModel)]="widgetConfiguration.size" (change)="updateSize($event);">
-                <mat-button-toggle (click)="render()" value="col-md-4">S</mat-button-toggle>
-                <mat-button-toggle (click)="render()" value="col-md-6">M</mat-button-toggle>
-                <mat-button-toggle (click)="render()" value="col-md-8">L</mat-button-toggle>
-                <mat-button-toggle (click)="render()" value="col-md-12">XL</mat-button-toggle>
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" style="transform: scale(.8)" [(ngModel)]="widgetConfiguration.size" (change)="updateSize($event); rerender();">
+                <mat-button-toggle value="col-md-4">S</mat-button-toggle>
+                <mat-button-toggle value="col-md-6">M</mat-button-toggle>
+                <mat-button-toggle value="col-md-8">L</mat-button-toggle>
+                <mat-button-toggle (click)="rerender()" value="col-md-12">XL</mat-button-toggle>
               </mat-button-toggle-group>
             </div>
             <div class="form-inline my-2 my-lg-0">
@@ -39,12 +39,12 @@
         </nav>
       </div>
     </div>
-     <div class="row">
+     <div class="row" >
       <div class="col-md-12" style="min-height: 550px;" *ngIf="!showConfig && !showText">
         <h3 class="text-center" *ngIf="error">
           Error parsing data!
         </h3>
-           <div AgWordCloud #outlet [wordData]="wordList" [options]="options" [width]="view[0]" [height]="view[1]"  width="{{view[0]}}" height="{{view[1]}}"></div>
+           <div AgWordCloud [wordData]="wordList" [options]="options" [width]="view[0]" [height]="view[1]"  width="{{view[0]}}" height="{{view[1]}}"></div>
         </div>
      </div>
     <div class="row" *ngIf="showText">
