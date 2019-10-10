@@ -1,3 +1,4 @@
+
 <div class="card-shadow">
         <div class="container-fluid">
           <div class="row">
@@ -44,9 +45,25 @@
                 Error parsing data!
               </h3>
               <!-- hier your widget !-->
-              <ul>
-              <li *ngFor="let i of dataList">{{i.value}}+{{i.type}}</li>
-              </ul>
+                     <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sentence</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let i of dataList; index as ind">
+                            <th scope="row">{{ind +1}}</th>
+                            <td>{{i.value}}</td>
+                            <td>{{i.type}}</td>
+                            <td [innerHTML]="i.sentence"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
             </div>
 
             <div class="row" *ngIf="showText">

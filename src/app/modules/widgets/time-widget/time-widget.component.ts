@@ -12,6 +12,8 @@ export class TimeWidgetComponent implements OnInit {
   showText = false;
   error = false;
   dataList = [];
+  invalid = /[°"§%()\[\]{}=\\?´`'#<>|,;.:+_-]+/g;
+
 
   constructor(private widgetService: WidgetsService) {
 
@@ -19,6 +21,7 @@ export class TimeWidgetComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.parseTimeData();
   }
 
@@ -27,8 +30,23 @@ export class TimeWidgetComponent implements OnInit {
     var text = this.widgetConfiguration.selectedProcessingElements[0].rawText;
     var dataList = [];
     for (var i of data) {
-      this.dataList.push({value: text.substring(i.begin - 1, i.end), type: i.type});
+      var wordInText = text.substring(i.begin - 1, i.end).replace(this.invalid, "");
+      this.dataList.push({value: wordInText, type: i.type, sentence: this.findSentence(wordInText)});
     }
     console.log(dataList);
+  }
+
+  findSentence(time: string) {
+    var sentences = this.widgetConfiguration.selectedProcessingElements[0].result.sentence;
+    var sentencesStatic = this.widgetConfiguration.selectedProcessingElements[0].result.sentence;
+    for (var sentence of sentences) {
+      if (sentence.value.search(time) !== -1) {
+        var satz = sentence.value.split(time);
+        sentence.value = sentence.value.replace(time,"XXXX");
+        //var sentenceTmp = sentence.value.split(time);
+        //return (sentenceTmp[0] + '  <b > ' + time + ' </b> ' + sentenceTmp[1]);
+        return ( satz[0] + '  <b > ' + time + ' </b> ' + satz[1]);
+      }
+    }
   }
 }
