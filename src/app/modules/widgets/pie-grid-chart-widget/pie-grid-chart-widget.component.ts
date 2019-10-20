@@ -116,9 +116,7 @@ export class PieGridChartWidgetComponent implements OnInit {
     this.widgetService.changeWidgetTitle(this.widgetConfiguration);
   }
 
-  hover(hover: MouseEvent) {
-    console.log(hover);
-  }
+
 
   private selectLayout (str) {
     switch (str) {

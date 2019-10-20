@@ -24,6 +24,7 @@ export class ResultsWidgetDisplayComponent implements OnInit {
   widgets: WidgetConfiguration[] = [];
 
   widgetToAdd: WidgetConfiguration = null;
+  search = false;
 
   constructor(private dialog: MatDialog, private store: Store, private widgetService: WidgetsService) {
   }
@@ -62,6 +63,11 @@ export class ResultsWidgetDisplayComponent implements OnInit {
       }
     });
   }
+
+
+
+
+
 
   private selectWidgetTexts() {
     if (this.resultViewerMode.type === 'AD_HOC') {
@@ -103,4 +109,6 @@ export class ResultsWidgetDisplayComponent implements OnInit {
       });
     }
   }
+
+
 }

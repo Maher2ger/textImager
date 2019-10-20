@@ -19,6 +19,7 @@ import { CharacterFrequencyWidgetComponent } from './character-frequency-widget/
 import { WordsLengthWidgetComponent } from './words-length-widget/words-length-widget.component';
 import {WordsFrequencyService} from '../../shared/services/words-frequency.service';
 import { TimeWidgetComponent } from './time-widget/time-widget.component';
+import { SearchWidgetComponent } from './search-widget/search-widget.component';
 
  
 @NgModule({
@@ -45,6 +46,7 @@ import { TimeWidgetComponent } from './time-widget/time-widget.component';
     CharacterFrequencyWidgetComponent,
     WordsLengthWidgetComponent,
     TimeWidgetComponent,
+    SearchWidgetComponent,
       ],
   exports: [
     StatisticsWidgetComponent,
@@ -58,6 +60,7 @@ import { TimeWidgetComponent } from './time-widget/time-widget.component';
     CharacterFrequencyWidgetComponent,
     WordsLengthWidgetComponent,
     TimeWidgetComponent,
+      SearchWidgetComponent
   ],
   providers : []
 })

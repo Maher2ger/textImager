@@ -16,12 +16,13 @@ import {JobDocumentPickerComponent} from '../dialogs/job-document-picker/job-doc
   ],
   declarations: [
     ResultsViewerComponent,
-    ResultsWidgetDisplayComponent
+    ResultsWidgetDisplayComponent,
+
   ],
   entryComponents: [
     WidgetPickerDialogComponent,
     AdHocDocumentPickerComponent,
-    JobDocumentPickerComponent
+    JobDocumentPickerComponent,
   ]
 })
 export class ResultsViewerModule {

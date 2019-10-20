@@ -98,4 +98,13 @@ export const widgetsAvailable = [
     sizesAvailable: ['S', 'M', 'L', 'XL'],
     requiredDocuments: 1
   },
+    {
+    key: 'SEARCH_WIDGET',
+    name: 'search im Text',
+    text: 'search im Text',
+    icon: 'timeline',
+    defaultSize: 'col-md-6',
+    sizesAvailable: ['S', 'M', 'L', 'XL'],
+    requiredDocuments: 1
+  },
 ];

@@ -15,6 +15,9 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
+
+
+
           <div class="form-inline my-2 my-lg-0">
             <button mat-button (click)="showWidgetDialog($event)">
               <i class="material-icons" style="font-size: 25px; position: relative; top: -2px;">
@@ -29,6 +32,32 @@
     </div>
   </div>
 </div>
+<!--  hier search widget  !-->
+<div class="container-fluid" *ngIf="widgets.length > 0 && search;">
+  <div class="row">
+    <div class="col-md-12 mb-25">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <form>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">begin</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">end</span>
+              </div>
+              <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+          </form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+<!--  hier search widget  !-->
 
 <!-- All Widgets Rendered in overview -->
 <div *ngIf="widgets.length > 0">
@@ -46,6 +75,7 @@
         <div class="{{ widget.size }}" app-character-frequency-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'CHARACTER_FREQUENCY_WIDGET'"></div>
         <div class="{{ widget.size }}" app-words-length-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'WORDS_LENGTH_WIDGET'"></div>
         <div class="{{ widget.size }}" app-time-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'TIME_WIDGET'"></div>
+        <div class="{{ widget.size }}" app-search-widget [widgetConfiguration]="widget" *ngIf="widget.key === 'SEARCH_WIDGET'"></div>
 
 
       </ng-container>
