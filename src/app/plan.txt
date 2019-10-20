@@ -1,7 +1,0 @@
-1. Frequency of characters (erledigt)
-2. Length of Words
-
-
-
-
--source Widget wurde erweitert, um den Text und Settings zu zeigen.
