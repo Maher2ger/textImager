@@ -122,7 +122,21 @@ export class JobDocumentPickerComponent implements OnInit {
     return this.selectedForWidget.filter((e: { documentId: string, _id: string }) => e._id === document._id).length > 0;
   }
 
-  private resolveProcessingResult(metadata: { id, fileName }, result: { begin, containerId, end, lemma, paragraph, sentence, sofa, token, location, timex3 }) {
+  private resolveProcessingResult(metadata:
+                                      { id, fileName },
+                                  result:
+                                      { begin,
+                                        containerId,
+                                        end,
+                                        lemma,
+                                        paragraph,
+                                        sentence,
+                                        sofa,
+                                        token,
+                                        location,
+                                        timex3,
+                                        similarity
+                                      }) {
     // toNlpKonfinguration
     return {
       id: metadata.id,
@@ -133,19 +147,30 @@ export class JobDocumentPickerComponent implements OnInit {
         begin: result.begin,
         end: result.end,
         sofa: result.sofa,
-
         paragraph: result.paragraph,
         sentence: result.sentence,
         lemma: result.lemma,
         token: result.token,
         location: result.location,
-        timex3: result.timex3
+        timex3: result.timex3,
+        similarity: result.similarity
       }
     };
   }
 
   // toNlpKonfinguration
-  private resolveTokens(parseResultFromJson: { containerId: string; begin: number; end: number; sofa: string; paragraph: any[]; sentence: any[]; lemma: any[]; token: any[]; location: any[], timex3: any[] }) {
+  private resolveTokens(parseResultFromJson:
+                            { containerId: string;
+                            begin: number;
+                            end: number;
+                            sofa: string;
+                            paragraph: any[];
+                            sentence: any[];
+                            lemma: any[];
+                            token: any[];
+                            location: any[];
+                            timex3: any[];
+                            similarity: any[] }) {
     for (let i = 0; i < parseResultFromJson.token.length; i++) {
       parseResultFromJson.token[i].value = parseResultFromJson.sofa.substr(parseResultFromJson.token[i].begin, parseResultFromJson.token[i].end);
     }

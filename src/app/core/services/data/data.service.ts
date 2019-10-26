@@ -15,10 +15,6 @@ export class DataService {
     const parser = new DOMParser();
 
     const xmlDocument = parser.parseFromString(xmlResponse, 'text/xml');
-    console.log("------------------------------------");
-    console.log(xmlDocument);
-    console.log("------------------------------------");
-
 
     let processingResult = this.buildEmptyProcessingResult(0, 0, id);
 
@@ -28,6 +24,8 @@ export class DataService {
     processingResult = this.addResultsForTagNew(tokenPrefix + ':Token', 'token', processingResult, xmlDocument);
     processingResult = this.addResultsForTagNew('type5' + ':Location', 'location', processingResult, xmlDocument);
     processingResult = this.addTimeToProcessingResult('heideltime' + ':Timex3', 'timex3', processingResult, xmlDocument);
+    processingResult = this.addResultsForTagNew('type15' + ':Similarity', 'similarity', processingResult, xmlDocument);
+
 
     const sofas = xmlDocument.getElementsByTagName('cas:Sofa');
 
@@ -38,8 +36,6 @@ export class DataService {
     } else {
       // error in the document, remove it from result;
     }
-
-    console.log(processingResult);
 
     return processingResult;
   }
@@ -104,7 +100,8 @@ export class DataService {
       lemma: [],
       token: [],
       location: [],
-      timex3: []
+      timex3: [],
+      similarity: [],
     };
   }
 

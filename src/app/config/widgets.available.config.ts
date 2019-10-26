@@ -107,4 +107,13 @@ export const widgetsAvailable = [
     sizesAvailable: ['S', 'M', 'L', 'XL'],
     requiredDocuments: 1
   },
+    {
+    key: 'SIMILARITY_WIDGET',
+    name: 'Similarity of Sentences',
+    text: 'Similarity of Sentences als Graph zeigen',
+    icon: 'graphic_eq',
+    defaultSize: 'col-md-6',
+    sizesAvailable: ['S', 'M', 'L', 'XL'],
+    requiredDocuments: 1
+  },
 ];

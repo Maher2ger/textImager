@@ -14,5 +14,7 @@ export interface ProcessingResult {
   token: AbstractXmlNodeObject[];
   location: AbstractXmlNodeObject[];
   timex3: AbstractXmlNodeTimeObject[];
+  similarity: AbstractXmlNodeObject[];
+
 
 }
