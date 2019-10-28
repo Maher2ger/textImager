@@ -15,6 +15,9 @@ export interface ProcessingResult {
   location: AbstractXmlNodeObject[];
   timex3: AbstractXmlNodeTimeObject[];
   similarity: AbstractXmlNodeObject[];
+  person: AbstractXmlNodeObject[];
+  organization: AbstractXmlNodeObject[];
+  namedEntity: AbstractXmlNodeObject[];
 
 
 }

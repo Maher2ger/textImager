@@ -134,6 +134,9 @@ export class JobDocumentPickerComponent implements OnInit {
                                         sofa,
                                         token,
                                         location,
+                                        person,
+                                        organization,
+                                        namedEntity,
                                         timex3,
                                         similarity,
                                       }) {
@@ -152,6 +155,9 @@ export class JobDocumentPickerComponent implements OnInit {
         lemma: result.lemma,
         token: result.token,
         location: result.location,
+        person: result.person,
+        organization: result.organization,
+        namedEntity: result.namedEntity,
         timex3: result.timex3,
         similarity: result.similarity,
       }
@@ -170,6 +176,9 @@ export class JobDocumentPickerComponent implements OnInit {
                             token: any[];
                             location: any[];
                             timex3: any[];
+                            person: any[];
+                            organization: any[];
+                            namedEntity: any[];
                             similarity: any[] }) {
     for (let i = 0; i < parseResultFromJson.token.length; i++) {
       parseResultFromJson.token[i].value = parseResultFromJson.sofa.substr(parseResultFromJson.token[i].begin, parseResultFromJson.token[i].end);

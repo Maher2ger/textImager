@@ -23,8 +23,14 @@ export class DataService {
     processingResult = this.addResultsForTagNew(tokenPrefix + ':Lemma', 'lemma', processingResult, xmlDocument);
     processingResult = this.addResultsForTagNew(tokenPrefix + ':Token', 'token', processingResult, xmlDocument);
     processingResult = this.addResultsForTagNew('type5' + ':Location', 'location', processingResult, xmlDocument);
+    processingResult = this.addResultsForTagNew('type5' + ':Person', 'person', processingResult, xmlDocument);
+    processingResult = this.addResultsForTagNew('type5' + ':Organization', 'organization', processingResult, xmlDocument);
+    processingResult = this.addResultsForTagNew('type5' + ':NamedEntity', 'namedEntity', processingResult, xmlDocument);
+
+
     processingResult = this.addTimeToProcessingResult('heideltime' + ':Timex3', 'timex3', processingResult, xmlDocument);
     processingResult = this.addResultsForTagNew('type15' + ':Similarity', 'similarity', processingResult, xmlDocument);
+
 
 
     const sofas = xmlDocument.getElementsByTagName('cas:Sofa');
@@ -100,6 +106,9 @@ export class DataService {
       lemma: [],
       token: [],
       location: [],
+      person: [],
+      organization: [],
+      namedEntity: [],
       timex3: [],
       similarity: [],
     };

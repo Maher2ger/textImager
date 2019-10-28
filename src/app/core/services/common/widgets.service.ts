@@ -210,7 +210,7 @@ export class WidgetsService {
     };
   }
   // toNlpKonfinguration
-  private resolveProcessingResult(metadata: { id, fileName }, result: { begin, containerId, end, lemma, paragraph, sentence, sofa, token, location, timex3, similarity }) {
+  private resolveProcessingResult(metadata: { id, fileName }, result: { begin, containerId, end, lemma, paragraph, sentence, sofa, token, location, person, organization, namedEntity, timex3, similarity }) {
 
     return {
       id: metadata.id,
@@ -228,6 +228,9 @@ export class WidgetsService {
         token: result.token,
         location: result.location,
         timex3: result.timex3,
+        person:  result.person,
+        organization:  result.organization,
+        namedEntity:  result.namedEntity,
         similarity: result.similarity
       }
     };
@@ -244,6 +247,9 @@ export class WidgetsService {
     lemma: any[];
     token: any[];
     location: any[],
+    person: any[],
+    organization:  any[],
+    namedEntity:  any[],
     timex3: any[],
     similarity: any[]
   }) {

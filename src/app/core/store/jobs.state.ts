@@ -177,6 +177,9 @@ export class JobsState {
                             lemma: any[];
                             token: any[];
                             location: any[];
+                            person: any[],
+                            organization:  any[],
+                            namedEntity:  any[],
                             timex3: any[];
                             similarity: any[]; }) {
     for (let i = 0; i < parseResultFromJson.token.length; i++) {

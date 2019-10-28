@@ -101,7 +101,32 @@ export class AdHocDocumentPickerComponent implements OnInit {
           processingElement.result.token[i].end,
           processingElement.result.sofa
         );
+
+      }for (let i = 0; i < processingElement.result.person.length; i++) {
+        processingElement.result.token[i].value = this.dataService.getSubStrFromCompleteTextByBeginAndEnd(
+          processingElement.result.token[i].begin,
+          processingElement.result.token[i].end,
+          processingElement.result.sofa
+        );
       }
+
+      for (let i = 0; i < processingElement.result.organization.length; i++) {
+        processingElement.result.token[i].value = this.dataService.getSubStrFromCompleteTextByBeginAndEnd(
+          processingElement.result.token[i].begin,
+          processingElement.result.token[i].end,
+          processingElement.result.sofa
+        );
+      }
+
+      for (let i = 0; i < processingElement.result.namedEntity.length; i++) {
+        processingElement.result.token[i].value = this.dataService.getSubStrFromCompleteTextByBeginAndEnd(
+          processingElement.result.token[i].begin,
+          processingElement.result.token[i].end,
+          processingElement.result.sofa
+        );
+      }
+
+
 
       /*
       for (let i = 0; i < processingElement.result.similarity.length; i++) {
