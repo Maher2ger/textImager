@@ -43,8 +43,86 @@
         <h3 class="text-center" *ngIf="error">
           Error parsing data!
         </h3>
+         <label style="margin-left: 30px"><b>Widget: </b></label>
+        <mat-button-toggle-group name="layout" aria-label="Font Style" style="transform: scale(.8)">
+                <mat-button-toggle  class="focus" (click)="switchTo('person')">People</mat-button-toggle>
+                <mat-button-toggle  class="focus" (click)="switchTo('location')">Locations</mat-button-toggle>
+                <mat-button-toggle  class="focus" (click)="switchTo('organization')">Organizations</mat-button-toggle>
+                <mat-button-toggle  class="focus" (click)="switchTo('namedEntity')">NamedEntities</mat-button-toggle>
+        </mat-button-toggle-group>
         <!-- Begin of Widget Directive -->
-
+        <table class="table" *ngIf="widegt=='person'">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sentence</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let i of personList; index as ind">
+                            <th scope="row">{{ind +1}}</th>
+                            <td>{{i.value}}</td>
+                            <td>{{i.type}}</td>
+                            <td [innerHTML]="i.sentence"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+        <table class="table" *ngIf="widegt=='location'">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sentence</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let i of locationList; index as ind">
+                            <th scope="row">{{ind +1}}</th>
+                            <td>{{i.value}}</td>
+                            <td>{{i.type}}</td>
+                            <td [innerHTML]="i.sentence"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+        <table class="table" *ngIf="widegt=='organization'">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sentence</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let i of organizationList; index as ind">
+                            <th scope="row">{{ind +1}}</th>
+                            <td>{{i.value}}</td>
+                            <td>{{i.type}}</td>
+                            <td [innerHTML]="i.sentence"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+        <table class="table" *ngIf="widegt=='namedEntity'">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sentence</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let i of namedEntityList; index as ind">
+                            <th scope="row">{{ind +1}}</th>
+                            <td>{{i.value}}</td>
+                            <td>{{i.type}}</td>
+                            <td [innerHTML]="i.sentence"></td>
+                          </tr>
+                        </tbody>
+                      </table>
 
         <!-- End of Widget Directive -->
         </div>
