@@ -24,6 +24,7 @@ import { SimilarityWidgetComponent } from './similarity-widget/similarity-widget
 import { ChartModule } from 'angular-highcharts';
 import { HighchartsChartComponent } from 'highcharts-angular';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { EntitiesWidgetComponent } from './entities-widget/entities-widget.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     TimeWidgetComponent,
     SearchWidgetComponent,
     SimilarityWidgetComponent,
-    HighchartsChartComponent
+    HighchartsChartComponent,
+    EntitiesWidgetComponent
 
       ],
   exports: [
@@ -71,6 +73,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
     TimeWidgetComponent,
     SearchWidgetComponent,
     SimilarityWidgetComponent,
+    EntitiesWidgetComponent
   ],
   providers : []
 })

@@ -116,4 +116,13 @@ export const widgetsAvailable = [
     sizesAvailable: ['S', 'M', 'L', 'XL'],
     requiredDocuments: 1
   },
+    {
+    key: 'ENTITIES_WIDGET',
+    name: 'Entities Table',
+    text: 'show Entities in a table',
+    icon: 'eject',
+    defaultSize: 'col-md-6',
+    sizesAvailable: ['S', 'M', 'L', 'XL'],
+    requiredDocuments: 1
+  },
 ];
