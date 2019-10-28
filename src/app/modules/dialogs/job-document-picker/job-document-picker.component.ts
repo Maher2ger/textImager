@@ -135,7 +135,7 @@ export class JobDocumentPickerComponent implements OnInit {
                                         token,
                                         location,
                                         timex3,
-                                        similarity
+                                        similarity,
                                       }) {
     // toNlpKonfinguration
     return {
@@ -153,7 +153,7 @@ export class JobDocumentPickerComponent implements OnInit {
         token: result.token,
         location: result.location,
         timex3: result.timex3,
-        similarity: result.similarity
+        similarity: result.similarity,
       }
     };
   }

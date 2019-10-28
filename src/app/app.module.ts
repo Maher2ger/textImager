@@ -23,6 +23,8 @@ import {TemplateModule} from './modules/template/template.module';
 import {ResultsViewerModule} from './modules/results-viewer/results-viewer.module';
 import {ResultsViewerState} from './modules/results-viewer/state/results-viewer.state';
 import { AngularOpenlayersModule } from 'ngx-openlayers';
+import { HighchartsChartComponent } from 'highcharts-angular';
+
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { AngularOpenlayersModule } from 'ngx-openlayers';
     AppComponent,
     ChartRendererComponent,
     ResourceManagerComponent,
-    LongTermProcessingCreateComponent
+    LongTermProcessingCreateComponent,
+
   ],
   imports: [
     CommonModule,

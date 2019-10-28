@@ -5,7 +5,6 @@ import {WidgetConfiguration} from '../../../domain/resources/widget.configuratio
 import { WordsFrequencyService } from '../../../shared/services/words-frequency.service';
 import {CloseResultWidget, UpdateWidgetSize} from '../../results-viewer/state/results-viewer.state.model';
 import {MatButtonToggleChange} from '@angular/material';
-import {ChangeDetectionStrategy} from '@angular/core';
 
 @Component({
   selector: '[app-word-cloud-widget]',

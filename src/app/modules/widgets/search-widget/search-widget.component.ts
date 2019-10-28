@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {WidgetConfiguration} from '../../../domain/resources/widget.configuration.model';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
 import {CloseResultWidget, UpdateWidgetSize} from '../../results-viewer/state/results-viewer.state.model';
 import {Actions, Store} from '@ngxs/store';
 import {WidgetsService} from '../../../core/services/common/widgets.service';
@@ -21,7 +20,9 @@ export class SearchWidgetComponent implements OnInit {
   rawText;
   indexList = [];
   searchResult;
-  constructor(private store: Store, private actions: Actions, private widgetService: WidgetsService) { }
+  constructor(private store: Store,
+              private actions: Actions,
+              private widgetService: WidgetsService) { }
 
   ngOnInit() {
     this.rawText = this.widgetConfiguration.selectedProcessingElements[0].rawText;

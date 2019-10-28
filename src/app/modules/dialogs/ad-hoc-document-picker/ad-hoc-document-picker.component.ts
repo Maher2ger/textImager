@@ -71,7 +71,6 @@ export class AdHocDocumentPickerComponent implements OnInit {
         );
       }
 
-
       for (let i = 0; i < processingElement.result.lemma.length; i++) {
         processingElement.result.lemma[i].value = this.dataService.getSubStrFromCompleteTextByBeginAndEnd(
           processingElement.result.lemma[i].begin,
@@ -104,6 +103,7 @@ export class AdHocDocumentPickerComponent implements OnInit {
         );
       }
 
+      /*
       for (let i = 0; i < processingElement.result.similarity.length; i++) {
         processingElement.result.token[i].value = this.dataService.getSubStrFromCompleteTextByBeginAndEnd(
           processingElement.result.token[i].begin,
@@ -111,6 +111,8 @@ export class AdHocDocumentPickerComponent implements OnInit {
           processingElement.result.sofa
         );
       }
+
+       */
 
       // toNlpKonfinguration
 

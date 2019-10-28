@@ -21,8 +21,11 @@ import {WordsFrequencyService} from '../../shared/services/words-frequency.servi
 import { TimeWidgetComponent } from './time-widget/time-widget.component';
 import { SearchWidgetComponent } from './search-widget/search-widget.component';
 import { SimilarityWidgetComponent } from './similarity-widget/similarity-widget.component';
+import { ChartModule } from 'angular-highcharts';
+import { HighchartsChartComponent } from 'highcharts-angular';
+import { GoogleChartsModule } from 'angular-google-charts';
 
- 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -33,6 +36,8 @@ import { SimilarityWidgetComponent } from './similarity-widget/similarity-widget
     NgxChartsModule,
     AngularOpenlayersModule,
     HttpClientModule,
+    ChartModule,
+    GoogleChartsModule,
     AgWordCloudModule.forRoot()
   ],
   declarations: [
@@ -49,6 +54,8 @@ import { SimilarityWidgetComponent } from './similarity-widget/similarity-widget
     TimeWidgetComponent,
     SearchWidgetComponent,
     SimilarityWidgetComponent,
+    HighchartsChartComponent
+
       ],
   exports: [
     StatisticsWidgetComponent,
