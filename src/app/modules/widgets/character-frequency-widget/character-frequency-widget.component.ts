@@ -72,7 +72,6 @@ export class CharacterFrequencyWidgetComponent implements OnInit {
   updateSize(size: MatButtonToggleChange) {
     this.store.dispatch(new UpdateWidgetSize({widget: this.widgetConfiguration, size: size.value}));
     this.clacWidth(size.value);
-    console.log(size.value);
 
 
   }

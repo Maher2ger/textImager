@@ -9,10 +9,12 @@ import HighchartsSankey from 'highcharts/modules/sankey';
 import HighchartsOrganization from 'highcharts/modules/organization';
 import HighchartsExporting from 'highcharts/modules/exporting';
 import {isUndefined} from 'util';
+import HighchartsDependencywheel from 'highcharts/modules/dependency-wheel';
 
 HighchartsSankey(Highcharts);
 HighchartsOrganization(Highcharts);
 HighchartsExporting(Highcharts);
+HighchartsDependencywheel(Highcharts);
 
 
 @Component({
@@ -34,6 +36,7 @@ export class SimilarityWidgetComponent implements OnInit {
     similarityList: any[] = [];
     dataList: any[] = [];
     data = [];
+    Sankey = false;
 
 
     parseRawData(rawdata: string) {
@@ -90,7 +93,6 @@ export class SimilarityWidgetComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.widgetConfiguration.size = "col-md-12";
         this.similarityGrad = 80;
         this.theText = this.widgetConfiguration.selectedProcessingElements[0].rawText;
         this.apiData = this.widgetConfiguration.selectedProcessingElements[0].result.similarity[0].value;
@@ -116,25 +118,83 @@ export class SimilarityWidgetComponent implements OnInit {
     }
 
     create(text) {
-    this.Chart = Highcharts.chart('container', {
-    chart: {
+        if (this.Sankey) {
+            this.Chart = Highcharts.chart('container', {
+                chart: {
+                      height: 500 ,
+                      width: 900,
+                      type: 'sankey',
+                      marginLeft:40
+                }
+                      ,
+                title: {
+                    text: ''
+                },
+                series: [{
+                    keys: ['from', 'to', 'weight'],
+                    data: this.data,
+                    type: 'sankey',
+                    name: 'Sankey demo series',
 
-        margin: 0,
-        width: 900,
-        height: 500,
-    },
-    title: {
-        text: 'Highcharts Sankey Diagram'
-    },
-    series: [{
-        keys: ['from', 'to', 'weight'],
-        data: this.data,
-        type: 'sankey',
-        name: 'Sankey demo series',
+                }],
 
-    }],
+                });
+                var thetext = text;
+                Highcharts.addEvent(this.Chart.container, 'click', function ($event) {
+                    if (!isUndefined(event.point)){
+                        if (!isUndefined(event.point.from)) {
+                            var first = event.point.options.from.split("-");
+                            var last = event.point.options.to.split("-");
+                            var value = parseInt(parseFloat(event.point.options.weight)*100);
+                            document.getElementById('firstArea').innerText = thetext.substring(
+                                parseInt(first[0]),parseInt(first[1]));
+                            document.getElementById('secondArea').innerText = thetext.substring(
+                                parseInt(last[0]),parseInt(last[1]));
+                            document.getElementById('bar').innerText = value.toString()+"%";
+                            document.getElementById('bar').style.width = value.toString()+"%";
+                            document.getElementById('bar').setAttribute('aria-valuenow',value);
+                        }
+                    }
 
-    });
+                });
+
+        } else {
+            this.Chart = Highcharts.chart('container', {
+                    chart: {
+                            margin: 0,
+                            width: 700,
+                            height: 500,
+                        },
+
+                title: {
+                    text: ''
+                },
+
+                series: [{
+                    keys: ['from', 'to', 'weight'],
+                    data: this.data,
+                    type: 'dependencywheel',
+                    name: 'Dependency wheel series',
+                    dataLabels: {
+                        color: '#333',
+                        textPath: {
+                            enabled: true,
+                            attributes: {
+                                dy: 5
+                            }
+                        },
+                        distance: 10
+                    },
+                    size: '95%',
+                }]
+
+            });
+                    }
+
+
+
+
+
     var thetext = text;
     Highcharts.addEvent(this.Chart.container, 'click', function ($event) {
         if (!isUndefined(event.point)){
@@ -142,7 +202,6 @@ export class SimilarityWidgetComponent implements OnInit {
                 var first = event.point.options.from.split("-");
                 var last = event.point.options.to.split("-");
                 var value = parseInt(parseFloat(event.point.options.weight)*100);
-                console.log(value);
                 document.getElementById('firstArea').innerText = thetext.substring(
                     parseInt(first[0]),parseInt(first[1]));
                 document.getElementById('secondArea').innerText = thetext.substring(
@@ -165,6 +224,16 @@ export class SimilarityWidgetComponent implements OnInit {
     apply() {
             this.parseChartData();
             this.create(this.theText);
+      }
+
+      changeToSankey() {
+        this.Sankey = true;
+        this.apply();
+      }
+
+      changeToDependencywheel() {
+        this.Sankey = false;
+        this.apply();
       }
 
 

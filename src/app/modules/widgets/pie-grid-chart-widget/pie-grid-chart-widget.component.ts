@@ -103,7 +103,6 @@ export class PieGridChartWidgetComponent implements OnInit {
         'value': this.widgetConfiguration.selectedProcessingElements[0].result.paragraph.length
       });
     }
-    console.log(this.data);
   }
 
   updateSize(size: MatButtonToggleChange) {

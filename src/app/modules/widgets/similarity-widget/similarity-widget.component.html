@@ -16,6 +16,12 @@
               </mat-button-toggle-group>
 
             </form>
+             <form>
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" style="transform: scale(.8)" >
+                <mat-button-toggle (click)="changeToDependencywheel()">Dependencywheel</mat-button-toggle>
+                <mat-button-toggle (click)="changeToSankey()">Sankey Chart</mat-button-toggle>
+              </mat-button-toggle-group>
+             </form>
 
             <form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(userlogin.value)">
               <div class="form-group row" style="position: relative;margin-right: 30px;margin-left: 30px">

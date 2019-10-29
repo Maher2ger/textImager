@@ -65,7 +65,6 @@ export class SimpleGraphWidgetComponent implements OnInit, OnChanges {
   getWordCount() {
     let result: { name, value }[] = [];
 
-    console.log(this.widgetConfiguration);
 
     for (let i = 0; i < this.widgetConfiguration.selectedProcessingElements[0].result[this.config.type].length; i++) {
       const value = this.cut(this.widgetConfiguration.selectedProcessingElements[0].result.sofa, this.widgetConfiguration.selectedProcessingElements[0].result[this.config.type][i].begin, this.widgetConfiguration.selectedProcessingElements[0].result[this.config.type][i].end);
@@ -143,8 +142,7 @@ export class SimpleGraphWidgetComponent implements OnInit, OnChanges {
 
   private render() {
     this.arrData = this.getTopValFromArray();
-    console.log(this.arrData);
-    
+    console.log(this.arrData)
     
   }
 
