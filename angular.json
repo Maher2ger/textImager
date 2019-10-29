@@ -31,7 +31,6 @@
               "./node_modules/jquery-ui-dist/jquery-ui.css"
             ],
             "scripts": [
-              "https://d3js.org/d3.v4.js",
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/jquery-ui-dist/jquery-ui.js"
             ]

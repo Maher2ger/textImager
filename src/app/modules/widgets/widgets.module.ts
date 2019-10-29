@@ -17,14 +17,13 @@ import { WordCloudWidgetComponent } from './word-cloud-widget/word-cloud-widget.
 import {AgWordCloudModule, AgWordCloudData} from 'angular4-word-cloud';
 import { CharacterFrequencyWidgetComponent } from './character-frequency-widget/character-frequency-widget.component';
 import { WordsLengthWidgetComponent } from './words-length-widget/words-length-widget.component';
-import {WordsFrequencyService} from '../../shared/services/words-frequency.service';
 import { TimeWidgetComponent } from './time-widget/time-widget.component';
 import { SearchWidgetComponent } from './search-widget/search-widget.component';
 import { SimilarityWidgetComponent } from './similarity-widget/similarity-widget.component';
-import { ChartModule } from 'angular-highcharts';
-import { HighchartsChartComponent } from 'highcharts-angular';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { EntitiesWidgetComponent } from './entities-widget/entities-widget.component';
+import { HighchartsChartModule } from 'highcharts-angular';
+
 
 
 @NgModule({
@@ -37,9 +36,9 @@ import { EntitiesWidgetComponent } from './entities-widget/entities-widget.compo
     NgxChartsModule,
     AngularOpenlayersModule,
     HttpClientModule,
-    ChartModule,
     GoogleChartsModule,
-    AgWordCloudModule.forRoot()
+    AgWordCloudModule.forRoot(),
+    HighchartsChartModule
   ],
   declarations: [
     StatisticsWidgetComponent,
@@ -55,7 +54,6 @@ import { EntitiesWidgetComponent } from './entities-widget/entities-widget.compo
     TimeWidgetComponent,
     SearchWidgetComponent,
     SimilarityWidgetComponent,
-    HighchartsChartComponent,
     EntitiesWidgetComponent
 
       ],

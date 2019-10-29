@@ -4,7 +4,7 @@
       <div class="col-md-12 mb-25">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: #ffffff !important;">
           <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <div class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <form class="navbar-nav mr-auto mt-2 mt-lg-0">
               <span class="widget-title">
                 {{ widgetConfiguration.name }} <i class="material-icons edit-icon" (click)="changeTitle()">edit</i>
               </span>
@@ -14,7 +14,19 @@
                 <mat-button-toggle value="col-md-8">L</mat-button-toggle>
                 <mat-button-toggle value="col-md-12">XL</mat-button-toggle>
               </mat-button-toggle-group>
-            </div>
+
+            </form>
+
+            <form #userlogin = "ngForm" (ngSubmit) = "onClickSubmit(userlogin.value)">
+              <div class="form-group row" style="position: relative;margin-right: 30px;margin-left: 30px">
+                <label class="col-form-label">Similarity-Grad:</label>
+                <div class="col-sm-4">
+                  <input id="similarityInput" min="30" max="100" name="grad" type="Number" class="form-control" [defaultValue]="similarityGrad"  ngModel>
+                </div>
+                <button type="button" class="btn btn-success" type = "submit" value = "submit">Apply</button>
+              </div>
+            </form>
+
             <div class="form-inline my-2 my-lg-0">
 
 
@@ -30,17 +42,23 @@
       </div>
     </div>
      <div class="row">
+      <div  id="container"></div>
+       <div style="float: right" class="col-md-4">
+        <div class="form-group col-md-12">
+          <label ><b>First Sentence:</b></label>
+          <textarea class="form-control " rows="5" id="firstArea"></textarea>
+          <label>
+              Similarity:
+            </label>
+          <div class="progress">
 
-        <google-chart #chart
-           [title]="title"
-           [type]="type"
-           [data]="data"
-           [columnNames]="columnNames"
-           [options]="options"
-           [width]="width"
-           [height]="height"
-        >
-        </google-chart>
+             <div class="progress-bar" id="bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+          </div>
+          <label ><b>Second Sentence:</b></label>
+          <textarea class="form-control" rows="5" id="secondArea"></textarea>
+        </div>
+      </div>
+
 
       </div>
 </div>
